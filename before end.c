@@ -6,8 +6,6 @@ int i;
 int j;
 int productsnumber;
 int SizeTAB=0;
-char ByQuantiti;
-int  ByCode;
 // structur
 typedef struct{
 char name [100];
