@@ -6,6 +6,8 @@ int i;
 int j;
 int productsnumber;
 int SizeTAB=0;
+char ByQuantiti;
+int  ByCode;
 // structur
 typedef struct{
 char name [100];
@@ -28,7 +30,7 @@ void add(){
             SizeTAB++;
 }
 void severalProduct(){
-	system("cls");
+	    system("cls");
             printf("number of product you want to add :");
             scanf("%d",&productsnumber);
             for(i=0;i<productsnumber;i++){
@@ -67,14 +69,14 @@ void liste(){
 }
 void search(){
 	system("cls");
-	int s,y;
+	int s,nbr;
 	printf("1. search by code\n");
     printf("2. search by quantity\n\n");
 	do{
-	scanf("%d",&y);
-	if(y!=1 && y!=2) printf("number not found \n");
-    }while(y!=1 && y!=2);
-    if(y==1){
+	scanf("%d",&nbr);
+	if(nbr!=1 && nbr!=2) printf("number not found \n");
+    }while(nbr!=1 && nbr!=2);
+    if(nbr==1){
     	printf("entre the code");
     	scanf("%d",&s);
     	 for(i=0; i<SizeTAB; i++){
@@ -100,10 +102,22 @@ void search(){
     	
 		}
 	}
+	void stock(){
+		system("cls");
+		for (i=0;i<SizeTAB;i++){
+			if(Product[i].quantity<3){
+	 printf("name : %s \n",Product[i].name);
+     printf("code : %d \n",Product[i].code);
+     printf("prise : %.2f dh\n",Product[i].prise);
+     printf("quantity : %d \n",Product[i].quantity);
+			}
+		}
+	}
+
 	void buyproduct(){
 		system("cls");
-	    int c,p,UserQuantity;
-	    char q;
+	    int c,UserQuantity;
+	    char ansewr;
 	    buy:
 	    printf("the code of product you want to buy : ");
 	    scanf("%d",&c);
@@ -111,12 +125,12 @@ void search(){
 	        if(Product[i].code==c){
 	             show();
 	             printf("is this the product you want to buy (y/n):\n");
-	             scanf("%s",&q);
-	         if(q == 'y' || q == 'Y'){
+	             scanf("%s",&ansewr);
+	         if(ansewr == 'y' || ansewr == 'Y'){
 	             printf("number of product you want to buy : ");
 	             scanf("%d",&UserQuantity);
 	             Product[i].quantity-=UserQuantity;
-	   }else if (q == 'n' || q == 'N') {
+	   }else if (ansewr == 'n' || ansewr == 'N') {
 	           goto buy;
 	   }
 	   }else {
@@ -148,8 +162,9 @@ printf("~~~~~~1- add a new product: \n");
 printf("~~~~~~2- add several new products : \n");
 printf("~~~~~~3- show product : \n");
 printf("~~~~~~4- search on pruduct : \n");
-printf("~~~~~~5- buy pruduct : \n");
-printf("~~~~~~6- delete a product : \n");
+printf("~~~~~~5- stock of product : \n");
+printf("~~~~~~6- buy pruduct : \n");
+printf("~~~~~~7- delete a product : \n");
 printf("entre your choice : ");
 scanf("%d",&choice);
 switch (choice){
@@ -166,9 +181,12 @@ switch (choice){
 	search();
     break;
     case 5 : 
-    buyproduct();
+    stock();
     break;
     case 6 :
+	buyproduct();
+    break;
+    case 7 :
     deletproduct();
     break;
    
